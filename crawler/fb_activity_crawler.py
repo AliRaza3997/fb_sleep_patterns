@@ -1,10 +1,12 @@
 import random
 from time import sleep
 import pendulum
+import os
 
 from util.saver.active_buddies_saver import ActiveBuddiesSaver
 from crawler.fb_crawler import FacebookCrawler
 from parser.active_buddies_parser import ActiveBuddiesParser
+from util.logger import Logger
 
 
 class ActiveBuddiesCrawler(FacebookCrawler):
@@ -12,7 +14,7 @@ class ActiveBuddiesCrawler(FacebookCrawler):
 
     """
 
-    def __init__(self, browser, credentials):
+    def __init__(self, browser, credentials, dump_dir, log_dir):
         """
         Parameters
         ----------
@@ -23,10 +25,18 @@ class ActiveBuddiesCrawler(FacebookCrawler):
 
         """
 
-        FacebookCrawler.__init__(self, browser, credentials)
+        FacebookCrawler.__init__(self, browser, credentials, dump_dir, log_dir)
 
-        # buddies saver for saving records
-        self._saver = ActiveBuddiesSaver("./dumped_data")
+        # Initialize logger
+        Logger.create_logger(os.path.join(self._log_dir, 'app.log'))
+        self.set_logger("crawler")
+
+        # Create buddies saver for saving records
+        self._saver = ActiveBuddiesSaver(self._dump_dir)
+
+    def set_logger(self, name):
+        self.logger = Logger.get_logger(name)
+        self.logger.debug("Logger initialized")
 
     def crawl(self):
         """Crawls Facebook to extract the online status of friends.
@@ -51,11 +61,9 @@ class ActiveBuddiesCrawler(FacebookCrawler):
                     "buddies": active_buddies
                 })
 
-                time_now = pendulum.now()
-
-                print("[%s] BuddyScrapper#scrap_active_buddies new record saved at %s" % (time_now.format("HH:mm:ss"), fn))
+                self.logger.info("New record (%d online friends) saved at %s", len(active_buddies), fn)
 
                 sleep(random.randint(60*2 + 30, 60*3 + 30))  # wait between 3-3.5 minutes
             except Exception as e:
-                print(e)
-                exit(0)
+                self.logger.error(e)
+                raise e

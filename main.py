@@ -15,6 +15,7 @@ import argparse
 
 from crawler.fb_activity_crawler import ActiveBuddiesCrawler
 from util.selenium_util import Browser
+from util.logger import Logger
 
 
 def argument_parser():
@@ -35,10 +36,13 @@ if __name__ == "__main__":
     driver_path = './lib/chromedriver'
     browser = Browser(driver_path, init=True)
 
-    crawler = ActiveBuddiesCrawler(browser, credentials={
+    log_dir = './logs'
+    dump_dir = './dumped_data'
+
+    crawler = ActiveBuddiesCrawler(browser, {
         "email": args.email,
         "password": args.password
-    })
+    }, dump_dir, log_dir)
 
     crawler.login()
     crawler.crawl()
