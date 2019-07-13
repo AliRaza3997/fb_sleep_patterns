@@ -1,0 +1,16 @@
+{
+  "name": "electron-gui",
+  "version": "1.0.0",
+  "description": "Facebook Status GUI",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^1.8.4"
+  },
+  "dependencies": {
+    "python-shell": "^1.0.7"
+  }
+}
