@@ -1,7 +1,8 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """main.py
 
-This script runs the Facebook crawler and dumps the data to disk as JSON.
+This script runs the Facebook crawler (infinitely) and dumps the data to disk as JSON.
 
 Example
 -------
@@ -11,11 +12,17 @@ Script can be executed as following::
 
 """
 
+__author__ = "Ali Raza"
+__license__ = "GPL"
+__version__ = "1.0.0"
+__maintainer__ = "Ali Raza"
+__email__ = "aliraza3997@gmail.com"
+__status__ = "Development"
+
 import argparse
 
 from crawler.fb_activity_crawler import ActiveBuddiesCrawler
 from util.selenium_util import Browser
-from util.logger import Logger
 
 
 def argument_parser():

@@ -1,5 +1,4 @@
 
-
 from bs4 import BeautifulSoup
 
 
@@ -11,7 +10,6 @@ class ActiveBuddiesParser:
     @staticmethod
     def parse_active_buddies(driver):
         buddy_list = driver.find_elements_by_xpath('//div[@id="mobile_buddylist"]')
-        driver.save_screenshot("screenshot.png")
 
         text = None
         if len(buddy_list):

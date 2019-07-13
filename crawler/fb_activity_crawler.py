@@ -28,7 +28,7 @@ class ActiveBuddiesCrawler(FacebookCrawler):
         FacebookCrawler.__init__(self, browser, credentials, dump_dir, log_dir)
 
         # Initialize logger
-        Logger.create_logger(os.path.join(self._log_dir, 'app.log'))
+        Logger.init_logger(os.path.join(self._log_dir, 'app.log'))
         self.set_logger("crawler")
 
         # Create buddies saver for saving records
@@ -52,6 +52,7 @@ class ActiveBuddiesCrawler(FacebookCrawler):
             try:
                 driver.get("https://mobile.facebook.com/buddylist.php")
                 sleep(8)  # wait for 8 seconds for the page to load
+                driver.save_screenshot(os.path.join(self._screen_shots_dir, "online_friends.png"))
 
                 # parse and save
                 active_buddies = ActiveBuddiesParser.parse_active_buddies(driver)

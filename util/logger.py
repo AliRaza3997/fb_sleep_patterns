@@ -35,7 +35,7 @@ class Logger:
         return new_logger
 
     @staticmethod
-    def create_logger(log_dir):
+    def init_logger(log_dir):
         if "root" in loggers:
             return
 
@@ -59,8 +59,7 @@ class Logger:
         console = logging.StreamHandler()
         console.setLevel(logging.INFO)
 
-        console_fmt = '%(asctime)s | %(log_color)s%(levelname)-8s%(reset)s | %(log_color)s%(name)-12s%(reset)s ' \
-                      '| %(log_color)s%(filename)s:%(lineno)d#%(funcName)s%(reset)s ' \
+        console_fmt = '%(asctime)s | %(log_color)s%(levelname)-8s%(reset)s | %(log_color)s%(name)s%(reset)s ' \
                       '- %(log_color)s%(message)s%(reset)s'
 
         console_fmtr = ColoredFormatter(
