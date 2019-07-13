@@ -13,7 +13,7 @@ Script can be executed as following::
 """
 
 __author__ = "Ali Raza"
-__license__ = "GPL"
+__license__ = "MIT"
 __version__ = "1.0.0"
 __maintainer__ = "Ali Raza"
 __email__ = "aliraza3997@gmail.com"
