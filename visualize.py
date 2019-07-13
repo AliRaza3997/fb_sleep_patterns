@@ -26,6 +26,7 @@ from itertools import groupby
 from collections import OrderedDict
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import FuzzyWordCompleter
+from tabulate import tabulate
 
 from analysis.buddies.buddies import Buddies
 from analysis.analysis_util.data_util import ActivityDataReader
@@ -55,6 +56,29 @@ def input_friend_name(available_names):
     name = prompt('Enter friend name: ', completer=name_completer)
 
     return name
+
+
+def input_days(available_days):
+    Logger.get_logger().info("{} day(s) found in the friend's data".format(len(available_days)))
+
+    ids = list(range(1, len(available_days)+1))
+
+    print(tabulate(list(zip(ids, available_days)), headers=['Id', 'Day'], tablefmt='orgtbl'))
+
+    Logger.get_logger().info("Please enter id range in format <start>-<end> (eg. 1-3) or a single id from the above table. Leave empty for visualizing last 3 days")
+    id_range = prompt('Enter days id range or a single id: ')
+
+    if id_range.strip() == "":
+        return available_days[-3:]
+    if id_range.isdigit():
+        return [available_days[int(id_range)-1]]
+    else:
+        range_ids = id_range.split("-")
+        range_ids = [int(_id) for _id in range_ids]
+        if len(range_ids) == 2:
+            return available_days[range_ids[0]-1:range_ids[1]]
+
+    return None
 
 
 def argument_parser():
@@ -90,7 +114,10 @@ if __name__ == "__main__":
         name, buddy = friends[name]
 
         if buddy is not None:
+            days = input_days(buddy.days)
+            Logger.get_logger().debug("Generating graph for days=%s", ", ".join(days))
+
             # Plot the activity graph
             plt.figure(figsize=(20, 8), dpi=80, facecolor='w', edgecolor='k')
-            buddy.plot_activity(days=buddy.days[-5:],
+            buddy.plot_activity(days=days,
                                 title="Online activity of {}".format(name.title()))

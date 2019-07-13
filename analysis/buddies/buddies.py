@@ -131,7 +131,7 @@ class Buddies:
             other_tz_friends = ListUtil.flatten(list(self._buddy_tzs.values()))
             default_tz_friends = list(set(self.names) - set(other_tz_friends))
 
-        Logger.get_logger().warning("Correcting timezones")
+        Logger.get_logger().info("Correcting timezones")
         _ = [self.buddies[name].in_tz(default_tz) for name in tqdm(default_tz_friends, disable=not self._verbose)]
 
         if self._buddy_tzs is None:
