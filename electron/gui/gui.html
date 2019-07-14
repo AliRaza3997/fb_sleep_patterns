@@ -1,15 +1,47 @@
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/gui.css">
+
   <script src="linkers/gui.js"></script>
 </head>
 
 <body>
-  <div class="container">
-    <ul class="nav nav-tabs">
-      <li class="active" onclick="menuTabClicked()"><a href="#">Home</a></li>
-      <li onclick="menuTabClicked()"><a href="#">Menu 1</a></li>
-      <li><a href="#">Menu 2</a></li>
-      <li><a href="#">Menu 3</a></li>
+
+  <div id="menuTabContainer" class="container">
+    <ul  class="nav nav-pills">
+      <li class="active">
+        <a  href="#1a" data-toggle="tab">Friend's Status</a>
+      </li>
+      <li><a href="#2a" data-toggle="tab">Using nav-pills</a>
+      </li>
     </ul>
+
+    <div class="tab-content clearfix">
+      <div class="tab-pane active" id="1a">
+
+
+
+        <div class="flex-container">
+          <div id="friends-name-container">
+            <h2>Friends</h2>
+            <p>Type something to find a friend</p>
+            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+            <br>
+
+            <ul class="list-group" id="friends-name-list">
+              <li class="list-group-item">Cras justo odio</li>
+              <li class="list-group-item">Dapibus ac facilisis in</li>
+              <li class="list-group-item">Morbi leo risus</li>
+              <li class="list-group-item">Porta ac consectetur ac</li>
+              <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+          </div>
+          <div id="friends-data-container">
+            <script src="linkers/test.js" id="08de9ff6-d48a-46f5-bcc6-cc28651d0a10"></script>
+        </div>
+
+    </div>
+
   </div>
+
 <body>

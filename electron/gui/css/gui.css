@@ -1,0 +1,20 @@
+body {
+  padding : 10px;
+}
+
+
+.flex-container {
+  display: flex; /* or inline-flex */
+  flex-direction: row;
+}
+
+#friends-name-container {
+    width: 30%;
+    border: 2px solid red;
+}
+
+#friends-data-container {
+    width: 70%;
+    height: 500px !important;
+    border: 2px solid green;
+}

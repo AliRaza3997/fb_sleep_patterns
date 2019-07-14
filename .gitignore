@@ -3,3 +3,6 @@ logs
 dumped_data
 __pycache__
 .ipynb_checkpoints
+
+node_modules
+package-lock.json
